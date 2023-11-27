@@ -4,7 +4,7 @@ import { authOptions } from "./auth/[...nextauth]";
 import { getServerSession } from "next-auth/next";
 
 const client = new PrismaClient;
-
+/*
 export default async function handler(req, res){
     
     console.log (req.body, "\n");
@@ -94,4 +94,4 @@ export default async function handler(req, res){
         console.log("Tarea borrada: \n", borrarTarea);
         res.status(200).json({tarea: borrarTarea.tarea});
     }
-}
+}*/
