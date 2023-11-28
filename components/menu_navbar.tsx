@@ -57,7 +57,7 @@
         </div>
     );
 
-    const SideCards = () => {
+    export const SideCards = () => {
         return (
         <div className="ml-[25em] h-full bg-red">
                     
