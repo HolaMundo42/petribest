@@ -92,7 +92,7 @@ const Sections: React.FC = () => {
 
 
       <section
-        className="flex-1 justify-center text-center pb-8 mx-auto"
+        className="flex-1 text-center pb-8 mx-auto"
         style={{
           background: "#17191C",
         }}

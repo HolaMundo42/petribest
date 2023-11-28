@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { PrismaClient, Prisma } from ".prisma/client";
 import { authOptions } from "../api/auth/[...nextauth]";
 import { getServerSession } from "next-auth/next";
-
+/*
 const client = new PrismaClient;
 export default async function handler(req, res){
     
@@ -95,4 +95,4 @@ export default async function handler(req, res){
 
         res.status(200).json({tarea: });
     }
-}
+}*/
