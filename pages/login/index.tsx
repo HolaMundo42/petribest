@@ -7,6 +7,7 @@ import PasswordInput from "../../components/PasswordInput";
 import EmailInput from "../../components/EmailInput";
 import { fetchLOGIN } from "../../components/fetch";
 import LoginBtn from "../../components/LoginBtn"
+import Image from "next/image";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -29,7 +30,15 @@ export default function Login() {
     <div className="relative flex flex-col md:flex-row items-stretch md:h-screen overflow-hidden bg-gray-100">
       <div className="w-full h-screen md:w-96 md:flex-shrink-0 bg-bg_color rounded-md shadow-md">
         <div className="flex flex-col justify-center items-center h-[100vh] p-8 md:p-16">
+        <div className="inline-block">
+          <Image
+            src="/petrilab.png"
+            width={50}
+            height={50}
+            alt="Picture of the author"
+          />
           <h1 className="text-3xl font-bold text-center text-gray-700">PetriLab</h1>
+        </div>
           <form className="mt-6 w-full max-w-sm" onSubmit={handleFormSubmit}>
             <EmailInput onChangeValue={setEmail}/>   
             <PasswordInput
@@ -54,6 +63,7 @@ export default function Login() {
             </div>
             
             <p className="mt-4 text-sm text-center text-gray-700">
+              No account yet?  {" "}
               <Link href="/signup" className="font-medium text-blue-600 hover:underline">
                 Sign up
               </Link>

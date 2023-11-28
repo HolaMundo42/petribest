@@ -1,10 +1,9 @@
-//imports
+import { NextApiRequest, NextApiResponse } from 'next';
 import { PrismaClient, Prisma } from ".prisma/client";
-import { authOptions } from "./auth/[...nextauth]";
+import { authOptions } from "../api/auth/[...nextauth]";
 import { getServerSession } from "next-auth/next";
 
 const client = new PrismaClient;
-/*
 export default async function handler(req, res){
     
     console.log (req.body, "\n");
@@ -54,7 +53,7 @@ export default async function handler(req, res){
                             tarea: req.body.dato as string, 
                             clase: req.body.clase as string,
                             fecha: req.body.date as string,
-                         },
+                        },
                     })    
     
                     console.log("Tarea creada: \n", crearTarea);
@@ -67,12 +66,12 @@ export default async function handler(req, res){
                 //Tirar error si tarea ya existe
                 catch (e) {
                     if (e instanceof Prisma.PrismaClientKnownRequestError) {
-                      if (e.code === 'P2002') {
+                    if (e.code === 'P2002') {
                         console.log(
-                          'Unique constraint violation, la tarea ya existe'
+                        'Unique constraint violation, la tarea ya existe'
                         )
                         res.status(400).json({error: 'P2002'});
-                      }
+                    }
                     }
                     //throw e
                 }
@@ -81,17 +80,19 @@ export default async function handler(req, res){
         }    
     }
 
-    //borrar tarea
     else if (req.method === "DELETE") {
         
-        const borrarTarea = await client.tareasPomodoro.delete ({
-            where: {
-                userId: usuario.id,
-                tarea: req.body.tarea as string,
-            },
+        const borrarTarea = await client.registers.delete ({
+        where: {
+            idReg: usuario.id,
+            email: ,
+            number: ,
+            img: ,
+            text: ,
+            ,
+        },
         })
 
-        console.log("Tarea borrada: \n", borrarTarea);
-        res.status(200).json({tarea: borrarTarea.tarea});
+        res.status(200).json({tarea: });
     }
-}*/
+}

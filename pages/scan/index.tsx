@@ -3,7 +3,22 @@ import React from 'react';
 import { useEffect } from 'react';
 
 export default function Scan() {
-const backgroundImageUrl = "/bacteria_wp.jpg"; // Replace with the URL of your background image
+const backgroundImageUrl = "/scan_page_backround.gif"; // Replace with the URL of your background image
+
+
+const handleUploadPhoto = () => {
+    fetch('../api/registers.js')
+.then(response => {
+    console.log(response);
+})
+.then(data => {
+    console.log(data);
+})
+.catch(error => {
+    console.log(error);
+}
+);
+}
 
 const divStyle = {
     height: "100vh",
@@ -40,7 +55,7 @@ return (
         <div className="flex items-center pl-8">
         {/* Replace the image with your actual image */}
         <img
-            src="/petrilab.jpg"
+            src="/favicon.ico"
             alt="PL"
             width={50}
             height={50}
@@ -61,7 +76,7 @@ return (
         
         <div className="border-white p-4 rounded-3xl mt-[8rem] mx-auto border-dashed border-2" style={{ maxWidth: "400px" }}>
             <p className="mb-5 text-xl">Click the button to upload your Petri Dish photo or drag it inside the box</p>
-            <button className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-20 mt-3 rounded text-md">Upload Photo</button>
+            <button className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-20 mt-3 rounded text-md" onClick={handleUploadPhoto}>Upload Photo</button>
         </div>
     </div>
 
