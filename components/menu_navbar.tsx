@@ -56,62 +56,58 @@
         </div>
         </div>
     );
+interface CardProps {
+    name: string;
+    date: string;
+    colonies: number;
+    imgSrc: string;
+    info: string;
+}
 
-    export const SideCards = () => {
-        
-        
-        
-useEffect(() => {
+export const SideCards = () => {
+    const { data: initialSession } = useSession();
+    const [cardsData, setCardsData] = useState<CardProps[]>([]);
+
+    useEffect(() => {
     const fetchData = async () => {
-    try {
-        // Assuming your backend is running on http://localhost:3000
+        try {
         const response = await fetch('http://localhost:3000/api/registers', {
-        method: 'GET',
-        headers: {
+            method: 'GET',
+            headers: {
             'Content-Type': 'application/json',
-        },
+            },
         });
         if (response.ok) {
-        const data = await response.json();
-        console.log(data.data);
+            const data = await response.json();
+            setCardsData(data.data);
         } else {
-        console.error('Error fetching data:', response.statusText);
+            console.error('Error fetching data:', response.statusText);
         }
-    } catch (error) {
+        } catch (error) {
         console.error('Error fetching data:', error);
-    }
+        }
     };
-    fetchData()
-}, []);
-        
-        return (
-        <div className="ml-[25em] h-full bg-red">
-                    
-            <div className="pt-5"></div>
-                <Card
-                    name="La Petriana"
-                    date="2023-11-26"
-                    colonies={42}
-                    imgSrc="/bacteria_wp.jpg"
-                    info="The pettriest!"
-                />           
-                <Card
-                    name="Huebix"
-                    date="2003-01-20"
-                    colonies={24}
-                    imgSrc="/huevos.jpg"
-                    info="El pollo es una criatura noble que  pone huevos todos los dias. Me gusta el huevo. Me gustan los huevos, y me gustarán por siempre."
-                /> 
-                <Card
-                    name="Pollito"
-                    date="2015-07-14"
-                    colonies={0}
-                    imgSrc="/huevo_roto.png"
-                    info="Las propiedades nutritivas del pollos son muchas ¡Por eso me encanta! :D"
-                />   
-            </div>
-        );
-    };
+
+    fetchData();
+    }, []);
+
+    return (
+    <div className="ml-[25em] h-full bg-red">
+        <div className="pt-5"></div>
+        {cardsData.map((card, index) => (
+        <Card
+            key={index}
+            name={card.name}
+            date={card.date}
+            colonies={card.colonies}
+            imgSrc={card.imgSrc}
+            info={card.info}
+        />
+        ))}
+    </div>
+    );
+};
+
 
     interface MenuProps {}
 

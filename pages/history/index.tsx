@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { FaSave, FaTimes, FaEdit } from 'react-icons/fa';
 import Link from 'next/link';
+import { useSession } from 'next-auth/react';
 
 interface HistoryProps {}
 
@@ -10,7 +11,7 @@ interface HistoryItem {
   date: string;
   colonies: number;
   imageUrl: string;
-  additionalInfo: string;
+  info: string;
 }
 
 const History: React.FC<HistoryProps> = () => {
@@ -20,49 +21,40 @@ const History: React.FC<HistoryProps> = () => {
   const [selectedItemColonies, setSelectedItemColonies] = useState<number | null>(null);
   const [selectedItemImageUrl, setSelectedItemImageUrl] = useState("/huevo_2.png");
   const [selectedItemInfo, setSelectedItemInfo] = useState<string | null>(null);
-  const [isEditMode, setIsEditMode] = useState(true);
-
-  //default values
-  const mockData: HistoryItem[] = [
-    {
-      name: 'Petriana',
-      date: '2023-11-26',
-      colonies: 42,
-      imageUrl: '/bacteria_wp.jpg',
-      additionalInfo: 'The pettriest!',
-    },
-    {
-      name: 'Huebix',
-      date: '2003-01-20',
-      colonies: 24,
-      imageUrl: '/huevos.jpg',
-      additionalInfo:
-        'El pollo es una criatura noble que pone huevos todos los dias. Me gusta el huevo. Me gustan los huevos, y me gustarán por siempre.El pollo es una criatura noble que pone huevos todos los dias. Me gusta el huevo. Me gustan los huevos, y me gustarán por siempre.El pollo es una criatura noble que pone huevos todos los dias. Me gusta el huevo. Me gustan los huevos, y me gustarán por siempre.El pollo es una criatura noble que pone huevos todos los dias. Me gusta el huevo. Me gustan los huevos, y me gustarán por siempre.',
-    },
-    {
-      name: 'Pollito',
-      date: '2015-07-14',
-      colonies: 0,
-      imageUrl: '/huevo_roto.png',
-      additionalInfo: 'Las propiedades nutritivas del pollos son muchas ¡Por eso me encanta! :D',
-    },
-  ];
-
+  const [isEditMode, setIsEditMode] = useState(false);
+  const [mockData, setMockData] = useState<HistoryItem[]>([]);
+  const { data: session } = useSession();
 
   useEffect(() => {
-    //hacer el get para llenar el mockdata acá
+    const fetchData = async () => {
+      try {
+        const response = await fetch('http://localhost:3000/api/registers', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+        if (response.ok) {
+          const data = await response.json();
+          setMockData(data.data);
+          if (data.data.length > 0) {
+            const item = data.data[0];
+            setSelectedCard(0);
+            setSelectedItemName(item.name);
+            setSelectedItemDate(item.date);
+            setSelectedItemColonies(item.colonies);
+            setSelectedItemImageUrl(item.imageUrl);
+            setSelectedItemInfo(item.info);
+          }
+        } else {
+          console.error('Error fetching data:', response.statusText);
+        }
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
 
-    if (!mockData) {
-      // Additional code (e.g., displaying a message)
-    }else{
-      const item = mockData[0];
-      setSelectedCard(0);
-          setSelectedItemName(item.name);
-          setSelectedItemDate(item.date);
-          setSelectedItemColonies(item.colonies);
-          setSelectedItemImageUrl(item.imageUrl);
-          setSelectedItemInfo(item.additionalInfo);
-    }
+    fetchData();
   }, []);
 
   const renderCardContent = (item: HistoryItem, index: number) => {
@@ -80,7 +72,8 @@ const History: React.FC<HistoryProps> = () => {
           setSelectedItemDate(item.date);
           setSelectedItemColonies(item.colonies);
           setSelectedItemImageUrl(item.imageUrl);
-          setSelectedItemInfo(item.additionalInfo);
+          setSelectedItemInfo(item.info);
+          setIsEditMode(false)
         }}
       >
         <div className="flex justify-between">
@@ -94,16 +87,31 @@ const History: React.FC<HistoryProps> = () => {
       </button>
     );
   };
+
   const handleSaveChanges = () => {
-    if(isEditMode)
-    {
+    if (isEditMode) {
       // hacer put con los cambios
     }
 
     setIsEditMode(!isEditMode);
   };
-  const handleDelete = () => {
-    // Delete logic
+
+  const handleDelete = async () => {
+
+    window.confirm("Are you sure you want to delete this PetriDish? This is PERMANENT");
+    if (selectedItemName && session) {
+      const response = await fetch("../api/registers", {
+        method: "DELETE",
+        body: JSON.stringify({ name: selectedItemName }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+  
+      const result = await response.json();
+      console.log(result);
+      window.location.reload()
+      }
   };
 
   return (
@@ -172,34 +180,33 @@ const History: React.FC<HistoryProps> = () => {
                   </div>
                 </div>
                 
-      {selectedItemName && (
-            <div className="flex items-center justify-between">
-            <button
-              className="flex items-center mr-2 p-2 pb-0"
-              onClick={handleSaveChanges}
-            >
-              {isEditMode ? (
-                <>
-                  <FaSave className="text-green-500 cursor-pointer hover:text-green-700 text-lg" />
-                  <span className="ml-2 text-lg">Save Progress</span>
-                </>
-              ) : (
-                <>
-                  <FaEdit className="text-blue-500 cursor-pointer hover:text-blue-700 text-lg" />
-                  <span className="ml-2 text-lg">Edit</span>
-                </>
-              )}
-              </button>
-              
-              <button className="flex items-center p-2" onClick={handleDelete}>
-                <FaTimes className="text-red-500 cursor-pointer hover:text-red-700 text-lg" />
-                <span className="ml-1 cursor-pointer hover:underline text-lg" onClick={handleDelete}>
-                  Delete
-                </span>
-              </button>
-
-            </div>
-              )}
+                {selectedItemName && (
+                  <div className="flex items-center justify-between">
+                    <button
+                      className="flex items-center mr-2 p-2 pb-0"
+                      onClick={handleSaveChanges}
+                    >
+                      {isEditMode ? (
+                        <>
+                          <FaSave className="text-green-500 cursor-pointer hover:text-green-700 text-lg" />
+                          <span className="ml-2 text-lg">Save Progress</span>
+                        </>
+                      ) : (
+                        <>
+                          <FaEdit className="text-blue-500 cursor-pointer hover:text-blue-700 text-lg" />
+                          <span className="ml-2 text-lg">Edit</span>
+                        </>
+                      )}
+                    </button>
+                    
+                    <button className="flex items-center p-2" onClick={handleDelete}>
+                      <FaTimes className="text-red-500 cursor-pointer hover:text-red-700 text-lg" />
+                      <span className="ml-1 cursor-pointer hover:underline text-lg" onClick={handleDelete}>
+                        Delete
+                      </span>
+                    </button>
+                  </div>
+                )}
               </div>
             </div>
           )}
