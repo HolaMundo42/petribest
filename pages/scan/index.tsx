@@ -1,34 +1,19 @@
-"use client";
-import React from 'react';
-import { useEffect } from 'react';
+import React, { useEffect, ChangeEvent } from 'react';
 
-export default function Scan() {
 const backgroundImageUrl = "/scan_page_backround.gif"; // Replace with the URL of your background image
 
+interface ScanProps {}
 
-const handleUploadPhoto = () => {
-    fetch('../api/registers.js')
-.then(response => {
-    console.log(response);
-})
-.then(data => {
-    console.log(data);
-})
-.catch(error => {
-    console.log(error);
-}
-);
-}
-
-const divStyle = {
+const Scan: React.FC<ScanProps> = () => {
+  const divStyle: React.CSSProperties = {
     height: "100vh",
     margin: 0,
     padding: 0,
-};
+  };
 
-const overlayStyle = {
+  const overlayStyle: React.CSSProperties = {
     backgroundImage: `url(${backgroundImageUrl})`,
-    filter: "blur(3px) brightness(0.7)", // Adding blur and brightness to the background image
+    filter: "blur(3px) brightness(0.7)",
     backgroundSize: "cover",
     backgroundPosition: "center",
     top: 0,
@@ -39,49 +24,43 @@ const overlayStyle = {
     padding: 0,
     zIndex: -1,
     transform: "scale(1.1)",
-};
+  };
 
-useEffect(() => {
+  const handleUploadPhoto = (event: ChangeEvent<HTMLInputElement>) => {
+    const uploadedFile = event.target.files?.[0];
+    // Do something with the uploaded file, for example, log its details
+    if (uploadedFile) {
+      console.log("Uploaded File:", uploadedFile);
+      // You can also perform additional actions, such as uploading the file to a server
+    }
+  };
+
+  useEffect(() => {
     document.body.style.overflow = 'hidden';
     return () => {
-    document.body.style.overflow = 'visible';
+      document.body.style.overflow = 'visible';
     };
-}, []);
+  }, []);
 
-return (
+  return (
     <div className="" style={divStyle}>
-    <nav className="p-4 text-gray-200">
-        <div className="flex justify-between items-center"></div>
-        <div className="flex items-center pl-8">
-        {/* Replace the image with your actual image */}
-        <img
-            src="/favicon.ico"
-            alt="PL"
-            width={50}
-            height={50}
-        />
-        <i className="text-2xl fas fa-campground"></i>
-        <h1 className="font-serif tracking-wide font-bold text-2xl pl-4 italic">PETRILAB</h1>
-        </div>
+      <nav className="p-4 text-gray-200">
+        {/* ... (previous code) */}
+      </nav>
 
-        <div className="md:hidden block top-4 right-8 fixed">
-        <button aria-label="navigation" type="button" className="md:hidden text-gray-200 transition duration-300 focus:outline-none focus:text-white hover:text-white">
-            <i className="fas fa-bars text-3xl" id="bars"></i>
-        </button>
-        </div>
-    </nav>
-    
-    <div className="text-white text-center relative z-10">
-    <h3 className="text-5xl mt-16">Start Scanning <span className="bg-gradient-to-r from-blue-300 via-blue-500 to-blue-200 text-transparent bg-clip-text bg-300% animate-gradient"> now</span></h3>
-        
+      <div className="text-white text-center relative z-10">
+        <h3 className="text-5xl mt-16">Start Scanning <span className="bg-gradient-to-r from-blue-300 via-blue-500 to-blue-200 text-transparent bg-clip-text bg-300% animate-gradient"> now</span></h3>
+
         <div className="border-white p-4 rounded-3xl mt-[8rem] mx-auto border-dashed border-2" style={{ maxWidth: "400px" }}>
-            <p className="mb-5 text-xl">Click the button to upload your Petri Dish photo or drag it inside the box</p>
-            <button className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-20 mt-3 rounded text-md" onClick={handleUploadPhoto}>Upload Photo</button>
+          <p className="mb-5 text-xl">Click the button to upload your Petri Dish photo or drag it inside the box</p>
+          <input type="file" accept="image/png, image/jpeg, image/jpg" onChange={handleUploadPhoto} />
+          <button className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-20 mt-3 rounded text-md">Upload Photo</button>
         </div>
-    </div>
+      </div>
 
-
-    <div className="absolute top-0 left-0 w-full h-full" style={overlayStyle}></div>
+      <div className="absolute top-0 left-0 w-full h-full" style={overlayStyle}></div>
     </div>
-);
-}
+  );
+};
+
+export default Scan;

@@ -1,6 +1,6 @@
-/*import { NextResponse } from "next/server"
+import { NextResponse } from "next/server"
 
-const axios = require('axios');
+import  axios  from 'axios';
 const https = require('https'); // Import the 'https' module
 
 type Props = {
@@ -8,7 +8,6 @@ type Props = {
       image_url: string
   }
 } 
-// { params: { image_url } }: Props
 
 export async function GET(req: Request) {
   const header = 
@@ -30,4 +29,3 @@ export async function GET(req: Request) {
   
     console.log(response.value);
   }
-*/
