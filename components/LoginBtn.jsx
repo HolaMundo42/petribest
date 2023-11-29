@@ -7,25 +7,20 @@ export default function LoginBtn() {
 
   const handleSignInGoogle = (e) => {
     e.preventDefault();
-    signIn("google");
+    signIn("google", {callbackUrl: "/"});
   };
   
   const handleSignInGithub = (e) => {
     e.preventDefault();
-    signIn("github");
+    signIn("github", {callbackUrl: "/"});
   };
 
   const handleSignOut = (e) => {
     e.preventDefault();
-    signOut();
+    signOut({ callbackUrl: "/login"});
   };
 
   if (session) {
-    if (router.pathname === "/login") {
-      window.location.href = "http://localhost:3000"; // despues lo tengo que cambiar por la url posta
-      return null; 
-    }
-
     return (
       <button
         type="button"
