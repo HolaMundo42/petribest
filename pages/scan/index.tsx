@@ -4,6 +4,7 @@ import { upload } from '@vercel/blob/client';
 import { useState, useRef } from 'react';
 import { useSession } from 'next-auth/react'; 
 import Image from 'next/image';
+import Router from 'next/router';
 
 const backgroundImageUrl = "/scan_page_backround.gif"; // Replace with the URL of your background image
 
@@ -110,7 +111,7 @@ const Scan: React.FC<ScanProps> = () => {
         console.log('Fetch POST successful');
         setBlob(newBlob);
         console.log("new blob!");  
-        window.location.href="http://localhost:3000/history";
+        Router.push("/history");
       } else {
         console.error('Error in Fetch POST:', response.statusText);
       }

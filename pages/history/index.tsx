@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { FaSave, FaTimes, FaEdit } from 'react-icons/fa';
 import Link from 'next/link';
 import { useSession } from 'next-auth/react';
+import { Router } from 'next/router';
 
 interface HistoryProps {}
 
