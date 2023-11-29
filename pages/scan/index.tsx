@@ -102,7 +102,7 @@ const Scan: React.FC<ScanProps> = () => {
           name: namePetridish,
           date: currentDate,
           colonies:coloniesPetridish,
-          img: newBlob,
+          img: newBlob, //<--- url de descarga
           info: infoPetridish,
         }),
       });
@@ -110,8 +110,8 @@ const Scan: React.FC<ScanProps> = () => {
       if (response.ok) {
         console.log('Fetch POST successful');
         setBlob(newBlob);
-        console.log("new blob!");  
-        Router.push("/history");
+        console.log("new blob!");
+        //Router.push("/history");
       } else {
         console.error('Error in Fetch POST:', response.statusText);
       }
@@ -210,7 +210,7 @@ const Scan: React.FC<ScanProps> = () => {
           </svg>
           </button>
           <div className="text-black">
-          <h2>You Petri Dish is Served</h2>
+          <h2>You Petri Dish is Ready</h2>
           <label className="block mt-4">
               Name:
               <input className="mt-1 p-2 w-full text-black border rounded" type="text" value={namePetridish} onChange={(e) => setName(e.target.value)} />
