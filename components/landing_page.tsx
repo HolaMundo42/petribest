@@ -5,19 +5,12 @@ import React, { useState, useEffect } from "react";
 
 const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
-
+  
   useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 0) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
+    document.body.classList.add('scrollbar', 'overflow-y-scroll');
+    
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      document.body.classList.remove('scrollbar', 'overflow-y-scroll');
     };
   }, []);
 
@@ -63,7 +56,7 @@ const Navbar: React.FC = () => {
 
 const Sections: React.FC = () => {
   return (
-    <div>
+    <div className="">
       <section
         className="flex-1 pt-[5rem] pb-24 flex items-center justify-center"
         style={{
@@ -90,7 +83,6 @@ const Sections: React.FC = () => {
         </div>
       </section>
 
-
       <section
         className="flex-1 text-center pb-8 mx-auto"
         style={{
@@ -99,19 +91,19 @@ const Sections: React.FC = () => {
       >
         <h2 className="text-4xl font-semibold py-8 text-slate-200">Features</h2>
         <div className="flex flex-col md:flex-row gap-8">
-          <div className="bg-[#090909]  text-white  p-6 rounded shadow-md hover:shadow-lg transition duration-300 transform hover:translate-y-[-5px]">
+          <div className="ml-10 bg-[#090909] text-white p-6 rounded shadow-md hover:shadow-lg transition duration-300 transform hover:translate-y-[-5px] md:w-1/3">
             <h3 className="text-xl font-semibold p b-2">Responsive Design</h3>
             <p className="text-slate-300">
               Our web page is fully responsive, ensuring it looks great on all devices.
             </p>
           </div>
-          <div className="bg-[#090909] text-white  p-6 rounded shadow-md hover:shadow-lg transition duration-300 transform hover:translate-y-[-5px]">
+          <div className="mx-10 bg-[#090909] text-white p-6 rounded shadow-md hover:shadow-lg transition duration-300 transform hover:translate-y-[-5px] md:w-1/3">
             <h3 className="text-xl font-semibold mb-2">Simple and Minimalistic</h3>
             <p className="text-slate-300">
               We believe in the beauty of simplicity, making the user experience smooth and clutter-free.
             </p>
           </div>
-          <div className="bg-[#090909] text-white p-6 rounded shadow-md hover:shadow-lg transition duration-300 transform hover:translate-y-[-5px]">
+          <div className="mr-10 bg-[#090909] text-white p-6 rounded shadow-md hover:shadow-lg transition duration-300 transform hover:translate-y-[-5px] md:w-1/3">
             <h3 className="text-xl font-semibold mb-2">Built with Modern Tools</h3>
             <p className="text-slate-300">
               This landing page is powered by Next.js, TypeScript, and Tailwind CSS.
@@ -122,7 +114,6 @@ const Sections: React.FC = () => {
     </div>
   );
 };
-
 
 const Footer: React.FC = () => {
 return (
@@ -148,7 +139,7 @@ return (
       </button>
       <button
         id="youtube"
-        className="bg-slate-900 transform hover:-translate-y-3 border-2 w-10 h-10 rounded-full duration-500 text-red-500 border-red-500 hover:bg-red-500 hover:text-white text-2xl flex items-center justify-center"
+        className="bg-slate-950 transform hover:-translate-y-3 border-2 w-10 h-10 rounded-full duration-500 text-red-500 border-red-500 hover:bg-red-500 hover:text-white text-2xl flex items-center justify-center"
       >
         <FontAwesomeIcon icon={faYoutube} className="w-[1.75rem]"/>
       </button>
@@ -175,7 +166,7 @@ return (
 
 const LandingPage: React.FC = () => {
   return (
-    <div className="flex flex-col min-h-screen min-w-screen">
+  <div className="flex flex-col min-h-screen min-w-screen">      
       <Navbar/>
       <Sections/>
       <Footer/>

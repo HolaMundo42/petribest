@@ -9,14 +9,14 @@ export default function Home() {
   
     if (session) {
     return (
-            <div className="">
-              <Menu />
-            </div>            
+          <div>
+            <Menu />
+          </div>            
         );
     }
     else {
       return(
-          <LandingPage />
+            <LandingPage />
         );
       }
 }

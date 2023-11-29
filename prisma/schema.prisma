@@ -8,19 +8,25 @@ datasource db {
   relationMode = "prisma"
 }
 
-model registers {
-  idReg  Int     @id @default(autoincrement())
-  email  String? @db.VarChar(255)
-  number Int?
-  img    String  @db.VarChar(255)
-  text   String? @db.VarChar(255)
-}
-
 model users {
   id     Int    @id @default(autoincrement())
   name   String @db.VarChar(255)
   contra String @db.VarChar(255)
   email  String @db.VarChar(255)
+}
+
+
+model registers {
+  id     String @id @default(uuid())
+  name   String? @db.VarChar(255) @unique
+  date   String? @db.VarChar(255)
+  colonies Int?
+  img    String  @db.VarChar(255)
+  info   String? @db.VarChar(255)
+  User   User   @relation(fields: [userId], references: [id])
+  userId String
+
+  @@index([userId])
 }
 
 model User {
@@ -31,6 +37,7 @@ model User {
   image          String?
   accounts       Account[]
   sessions       Session[]
+  register       registers[]
 }
 
 model Session {

@@ -58,6 +58,32 @@
     );
 
     export const SideCards = () => {
+        
+        
+        
+useEffect(() => {
+    const fetchData = async () => {
+    try {
+        // Assuming your backend is running on http://localhost:3000
+        const response = await fetch('http://localhost:3000/api/registers', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        });
+        if (response.ok) {
+        const data = await response.json();
+        console.log(data.data);
+        } else {
+        console.error('Error fetching data:', response.statusText);
+        }
+    } catch (error) {
+        console.error('Error fetching data:', error);
+    }
+    };
+    fetchData()
+}, []);
+        
         return (
         <div className="ml-[25em] h-full bg-red">
                     
