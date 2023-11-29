@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server"
+/*import { NextResponse } from "next/server"
 
 import  axios  from 'axios';
 const https = require('https'); // Import the 'https' module
@@ -29,3 +29,4 @@ export async function GET(req: Request) {
   
     console.log(response.value);
   }
+*/
