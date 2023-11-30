@@ -111,7 +111,7 @@ const Scan: React.FC<ScanProps> = () => {
         console.log('Fetch POST successful');
         setBlob(newBlob);
         console.log("new blob!");
-        //Router.push("/history");
+        Router.push("/history");
       } else {
         console.error('Error in Fetch POST:', response.statusText);
       }

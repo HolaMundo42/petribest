@@ -42,7 +42,7 @@
         <div className="mb-5 border-b-2 border-slate-500 pl-4"></div>
 
         <div className="flex mb-3">
-            <div className="mr-4">
+            <div className="mr-4 text-white">
                 <img src={imgSrc} alt="img.jpg" className="w-60 h-40 object-cover rounded-lg" />
             </div>
 
@@ -162,7 +162,7 @@ export const SideCards = () => {
                 Inbox
                 </div>
                 <div className="ml-5 rounded-full">
-                <Chip value="69" size="sm" variant="ghost" className="text-slate-200" />
+                <Chip value="0" size="sm" variant="ghost" className="text-slate-200" />
                 </div>
             </div>
     
