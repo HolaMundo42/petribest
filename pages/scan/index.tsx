@@ -6,6 +6,7 @@ import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import Router from 'next/router';
 
+
 const backgroundImageUrl = "/scan_page_backround.gif"; // Replace with the URL of your background image
 
 interface ScanProps {}
