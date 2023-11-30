@@ -89,6 +89,8 @@ const Scan: React.FC<ScanProps> = () => {
         handleUploadUrl: '/api/avatar/upload',
       });
 
+
+      
       const provDate = new Date();
       const currentDate = provDate.toString()
 
@@ -107,11 +109,14 @@ const Scan: React.FC<ScanProps> = () => {
         }),
       });
       */
-      const body = 
-      {
-        'image_url': 'https://res.cloudinary.com/dso4vg1hw/image/upload/f_auto,q_auto/fknm0eyvz0lzhrrykdwy'
+     const body = 
+     {
+       'image_url': 'https://res.cloudinary.com/dso4vg1hw/image/upload/f_auto,q_auto/fknm0eyvz0lzhrrykdwy'
       }
-      const response = await fetch('https://petrilabapi.onrender.com/process_image/', {
+
+      //procesamiento de imagen acá
+      
+      const response: any = await fetch('https://petrilabapi.onrender.com/process_image/', {
         method: 'POST',
         mode: 'cors', 
         cache: 'no-cache', 
