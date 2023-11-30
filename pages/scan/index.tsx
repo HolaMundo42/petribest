@@ -93,7 +93,7 @@ const Scan: React.FC<ScanProps> = () => {
       const currentDate = provDate.toString()
 
       // Fetch POST after upload
-      const response = await fetch('http://localhost:3000/api/registers', {
+      /*const response = await fetch('http://localhost:3000/api/registers', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -106,6 +106,24 @@ const Scan: React.FC<ScanProps> = () => {
           info: infoPetridish,
         }),
       });
+      */
+      const body = 
+      {
+        'image_url': 'https://res.cloudinary.com/dso4vg1hw/image/upload/f_auto,q_auto/fknm0eyvz0lzhrrykdwy'
+      }
+      const response = await fetch('https://petrilabapi.onrender.com/process_image/', {
+        method: 'POST',
+        mode: 'cors', 
+        cache: 'no-cache', 
+        credentials: 'same-origin',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(body), 
+      }).then((res) =>{
+        console.log(res);
+      });
+      
 
       if (response.ok) {
         console.log('Fetch POST successful');
