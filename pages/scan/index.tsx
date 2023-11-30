@@ -22,7 +22,34 @@ const Scan: React.FC<ScanProps> = () => {
 
   const { data: session } = useSession();
 
-  const handleOpenPopup = ( inputFileRef: React.RefObject<HTMLInputElement>) => {
+  const handleOpenPopup = async ( inputFileRef: React.RefObject<HTMLInputElement>) => {
+
+
+    const body = 
+    {
+      "image_url":"https://res.cloudinary.com/dso4vg1hw/image/upload/f_auto,q_auto/fknm0eyvz0lzhrrykdwy"
+      }	
+
+     //procesamiento de imagen acá
+     
+     const response = await fetch('https://petrilabapi.onrender.com/process_image/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Credentials': true,
+        'Access-Control-Allow-Origin': '*', 
+        'Access-Control-Allow-Methods': 'GET,DELETE,PATCH,POST,PUT'
+      },
+      body: JSON.stringify({ 
+        image_url : "https://res.cloudinary.com/dso4vg1hw/image/upload/f_auto,q_auto/fknm0eyvz0lzhrrykdwy"      }),
+    });
+    
+    if (response.ok) {
+      console.log(response);
+    } else {
+      console.error('Error in Fetch POST:', response.statusText);
+    }
+     
 
     if(inputFileRef.current && inputFileRef.current.value === ''){
       setShowPopup(0);
@@ -95,7 +122,7 @@ const Scan: React.FC<ScanProps> = () => {
       const currentDate = provDate.toString()
 
       // Fetch POST after upload
-      /*const response = await fetch('http://localhost:3000/api/registers', {
+      const response = await fetch('http://localhost:3000/api/registers', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -108,28 +135,7 @@ const Scan: React.FC<ScanProps> = () => {
           info: infoPetridish,
         }),
       });
-      */
-     const body = 
-     {
-       'image_url': 'https://res.cloudinary.com/dso4vg1hw/image/upload/f_auto,q_auto/fknm0eyvz0lzhrrykdwy'
-      }
-
-      //procesamiento de imagen acá
       
-      const response: any = await fetch('https://petrilabapi.onrender.com/process_image/', {
-        method: 'POST',
-        mode: 'cors', 
-        cache: 'no-cache', 
-        credentials: 'same-origin',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(body), 
-      }).then((res) =>{
-        console.log(res);
-      });
-      
-
       if (response.ok) {
         console.log('Fetch POST successful');
         setBlob(newBlob);

@@ -118,6 +118,7 @@ export const SideCards = () => {
 
     useEffect(() => {
         setSession(initialSession);
+        
     }, [initialSession]);
 
     const handleOpen = (value: number) => {

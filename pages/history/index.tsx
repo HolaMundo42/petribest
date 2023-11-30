@@ -169,7 +169,7 @@ const History: React.FC<HistoryProps> = () => {
                 <div className="mb-5 border-b-2 border-slate-500 pl-4"></div>
                 
                 <div className="flex mb-3">
-                  <div className="mr-4 text-white">
+                  <div className="mr-4">
                     <img src={selectedItemImageUrl} alt="img.jpg" className="w-80 h-60 object-cover rounded-lg mr-5" />
                   </div>
                   
