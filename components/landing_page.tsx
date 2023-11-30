@@ -151,12 +151,13 @@ return (
         <FontAwesomeIcon icon={faDiscord} className="w-[1.9rem]"/>
       </button>
 
-      <button
+      <Link
+      href = "https://www.linkedin.com/company/petrilab-proyecto"
         id="linkedin"
         className="bg-slate-900 transform hover:-translate-y-3 border-2 w-10 h-10 rounded-full duration-500 text-blue-500 border-blue-500 hover:bg-blue-500 hover:text-white text-2xl flex items-center justify-center"
       >
         <FontAwesomeIcon icon={faLinkedinIn} className="w-[1.35rem]"/>
-      </button>
+      </Link>
 
       </div>
   </div>
