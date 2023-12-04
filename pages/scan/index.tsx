@@ -36,10 +36,10 @@ const Scan: React.FC<ScanProps> = () => {
      const response = await fetch('https://petrilabapi.onrender.com/process_image/', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Credentials': true,
+        'Content-Type': 'application/json', 
+        'Access-Control-Allow-Credentials': 'true',
         'Access-Control-Allow-Origin': '*', 
-        'Access-Control-Allow-Methods': 'GET,DELETE,PATCH,POST,PUT'
+        'Access-Control-Allow-Methods': 'GET,POST',
       },
       body: JSON.stringify({ 
         image_url : "https://res.cloudinary.com/dso4vg1hw/image/upload/f_auto,q_auto/fknm0eyvz0lzhrrykdwy"      }),
