@@ -3,14 +3,22 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInstagram, faYoutube, faDiscord, faLinkedinIn } from "@fortawesome/free-brands-svg-icons";
 import React, { useState, useEffect } from "react";
 
+
 const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
-  
+
   useEffect(() => {
-    document.body.classList.add('scrollbar', 'overflow-y-scroll');
-    
+    const handleScroll = () => {
+      if (window.scrollY > 0) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
     return () => {
-      document.body.classList.remove('scrollbar', 'overflow-y-scroll');
+      window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
@@ -19,7 +27,7 @@ const Navbar: React.FC = () => {
       className={`${
         isScrolled
           ? 'backdrop-blur-sm bg-gray-800/60 hover:bg-gray-800/75 text-slate-200 fixed py-3 w-full z-10 transition-all duration-300 shadow-[0_8px_30px_rgb(0,0,0,0.12)]'
-          : 'bg-[#17191C] text-slate-200 transition-all py-2 duration-300 shadow-none'
+          : 'bg-[#05090c] text-slate-200 transition-all py-2 duration-300 shadow-none'
       }`}
     >
       <div className={`${
@@ -91,19 +99,19 @@ const Sections: React.FC = () => {
       >
         <h2 className="text-4xl font-semibold py-8 text-slate-200">Features</h2>
         <div className="flex flex-col md:flex-row gap-8">
-          <div className="ml-10 bg-[#090909] text-white p-6 rounded shadow-md hover:shadow-lg transition duration-300 transform hover:translate-y-[-5px] md:w-1/3">
+          <div className="ml-10 bg-[#05090c] text-white p-6 rounded shadow-md hover:shadow-lg transition duration-300 transform hover:translate-y-[-5px] md:w-1/3">
             <h3 className="text-xl font-semibold p b-2">Responsive Design</h3>
             <p className="text-slate-300">
               Our web page is fully responsive, ensuring it looks great on all devices.
             </p>
           </div>
-          <div className="mx-10 bg-[#090909] text-white p-6 rounded shadow-md hover:shadow-lg transition duration-300 transform hover:translate-y-[-5px] md:w-1/3">
+          <div className="mx-10 bg-[#05090c] text-white p-6 rounded shadow-md hover:shadow-lg transition duration-300 transform hover:translate-y-[-5px] md:w-1/3">
             <h3 className="text-xl font-semibold mb-2">Simple and Minimalistic</h3>
             <p className="text-slate-300">
               We believe in the beauty of simplicity, making the user experience smooth and clutter-free.
             </p>
           </div>
-          <div className="mr-10 bg-[#090909] text-white p-6 rounded shadow-md hover:shadow-lg transition duration-300 transform hover:translate-y-[-5px] md:w-1/3">
+          <div className="mr-10 bg-[#05090c] text-white p-6 rounded shadow-md hover:shadow-lg transition duration-300 transform hover:translate-y-[-5px] md:w-1/3">
             <h3 className="text-xl font-semibold mb-2">Built with Modern Tools</h3>
             <p className="text-slate-300">
               This landing page is powered by Next.js, TypeScript, and Tailwind CSS.
@@ -117,7 +125,7 @@ const Sections: React.FC = () => {
 
 const Footer: React.FC = () => {
 return (
-<footer className="bg-[#090909] py-6">
+<footer className="bg-[#05090c] py-6">
   <div className="container mx-auto text-center flex flex-col items-center sm:flex-row sm:justify-between">
       <div className="mb-4 sm:mb-0 flex items-center">
       <Link href="/terms-of-service" className="text-slate-300 hover:text-white">
@@ -139,8 +147,7 @@ return (
       </button>
       <button
         id="youtube"
-        className="bg-slate-950 transform hover:-translate-y-3 border-2 w-10 h-10 rounded-full duration-500 text-red-500 border-red-500 hover:bg-red-500 hover:text-white text-2xl flex items-center justify-center"
-      >
+        className="bg-slate-950 transform hover:-translate-y-3 border-2 w-10 h-10 rounded-full duration-500 text-red-500 border-red-500 hover:bg-red-500 hover:text-white text-2xl flex items-center justify-center"      >
         <FontAwesomeIcon icon={faYoutube} className="w-[1.75rem]"/>
       </button>
 
