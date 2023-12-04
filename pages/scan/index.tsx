@@ -38,8 +38,7 @@ const Scan: React.FC<ScanProps> = () => {
       headers: {
         'Content-Type': 'application/json', 
         'Access-Control-Allow-Credentials': 'true',
-        'Access-Control-Allow-Origin': '*', 
-        'Access-Control-Allow-Methods': 'GET,POST',
+        'Access-Control-Allow-Methods': '*',
       },
       body: JSON.stringify({ 
         image_url : "https://res.cloudinary.com/dso4vg1hw/image/upload/f_auto,q_auto/fknm0eyvz0lzhrrykdwy"      }),
