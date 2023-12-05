@@ -45,9 +45,11 @@ const Scan: React.FC<ScanProps> = () => {
     });
     
     if (response.ok) {
-      console.log(response);
+      console.log(JSON.stringify(response))
+      const movies = await response.json();
+      console.log(movies);
     } else {
-      console.log(response.json)
+      console.log(JSON.stringify(response))
       console.error('Error in Fetch POST:', response.statusText);
     }
      
