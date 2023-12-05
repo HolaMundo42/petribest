@@ -35,7 +35,6 @@ const Scan: React.FC<ScanProps> = () => {
      
     const response = await fetch('https://petrilabapi.onrender.com/process_image/', {
       method: 'POST',
-      mode:'no-cors',
       headers: {
         'Content-Type': 'application/json', 
         'Access-Control-Allow-Credentials': 'True',
