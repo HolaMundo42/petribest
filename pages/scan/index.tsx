@@ -20,16 +20,11 @@ const Scan: React.FC<ScanProps> = () => {
   const [infoPetridish, setInformation] = useState<string>('');
   const [coloniesPetridish, setColonies] = useState<number>(42);
   const [noFileSelectedError, setFileError] = useState(false);
+  const [filee, setFilee] = useState("https://res.cloudinary.com/dso4vg1hw/image/upload/f_auto,q_auto/fknm0eyvz0lzhrrykdwy");
 
   const { data: session } = useSession();
 
   const handleOpenPopup = async ( inputFileRef: React.RefObject<HTMLInputElement>) => {
-
-
-    const body = 
-    {
-      "image_url":"https://res.cloudinary.com/dso4vg1hw/image/upload/f_auto,q_auto/fknm0eyvz0lzhrrykdwy"
-      }	
 
      //procesamiento de imagen acá
      
@@ -41,7 +36,8 @@ const Scan: React.FC<ScanProps> = () => {
         'Access-Control-Allow-Methods': '*',
       },
       body: JSON.stringify({ 
-        image_url : "https://res.cloudinary.com/dso4vg1hw/image/upload/f_auto,q_auto/fknm0eyvz0lzhrrykdwy"      }),
+        image_url : filee
+      }),
     });
     
     if (response.ok) {
@@ -71,10 +67,12 @@ const Scan: React.FC<ScanProps> = () => {
   }
 
   const handleFileChange = () => {
-    const file = inputFileRef.current?.files?.[0];
-    if (file) {
-      setSelectedFileName(file.name);
+    const fiile = inputFileRef.current?.files?.[0];
+    if (fiile) {
+      setFilee(fiile.name);
+      setSelectedFileName(fiile.name);
     } else {
+      setFilee(""); // or any default value you want when no file is selected
       setSelectedFileName(null);
     }
   };
@@ -254,7 +252,7 @@ const Scan: React.FC<ScanProps> = () => {
               <input className="mt-1 p-2 w-full text-black border rounded" type="text" value={infoPetridish} onChange={(e) => setInformation(e.target.value)} />
           </label>
           <Image 
-              src={"/bacteria_wp.jpg"} //poner img blob cuando entienda como
+              src={filee} //poner img blob cuando entienda como
               width={250} 
               height={250} 
               alt="PL"
