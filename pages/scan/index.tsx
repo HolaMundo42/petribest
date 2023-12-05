@@ -292,7 +292,7 @@ const Scan: React.FC<ScanProps> = () => {
 
             <h2>Login to save changes</h2>
             <Image 
-              src={"/bacteria_wp.jpg"} //poner img blob cuando entienda como
+              src={filee} //poner img blob cuando entienda como
               width={250} 
               height={250} 
               alt="PL"
