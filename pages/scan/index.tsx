@@ -46,8 +46,10 @@ const Scan: React.FC<ScanProps> = () => {
     
     if (response.ok) {
       console.log(JSON.stringify(response))
-      const movies = await response.json();
-      console.log(movies);
+      const petrinum = await response.json();
+      const petrinum_final = petrinum["predicted_count"];
+      console.log(petrinum_final)
+      setColonies(petrinum_final);
     } else {
       console.log(JSON.stringify(response))
       console.error('Error in Fetch POST:', response.statusText);
