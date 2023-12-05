@@ -33,12 +33,12 @@ const Scan: React.FC<ScanProps> = () => {
 
      //procesamiento de imagen acá
      
-     const response = await fetch('https://petrilabapi.onrender.com/process_image/', {
+    const response = await fetch('https://petrilabapi.onrender.com/process_image/', {
       method: 'POST',
       mode:'no-cors',
       headers: {
         'Content-Type': 'application/json', 
-        'Access-Control-Allow-Credentials': 'true',
+        'Access-Control-Allow-Credentials': 'True',
         'Access-Control-Allow-Methods': '*',
       },
       body: JSON.stringify({ 
@@ -48,6 +48,7 @@ const Scan: React.FC<ScanProps> = () => {
     if (response.ok) {
       console.log(response);
     } else {
+      console.log(response.json)
       console.error('Error in Fetch POST:', response.statusText);
     }
      
