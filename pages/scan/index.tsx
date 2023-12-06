@@ -26,8 +26,14 @@ const Scan: React.FC<ScanProps> = () => {
 
   const handleOpenPopup = async ( inputFileRef: React.RefObject<HTMLInputElement>) => {
 
-     //procesamiento de imagen acá
-     
+     //procesamiento de imagen
+     const respond = await fetch('/api/cloudinary', {
+      method: 'POST', 
+     });
+     const data = await respond.json()
+     console.log(data)
+
+     //envio de imagen a api
     const response = await fetch('https://petrilabapi.onrender.com/process_image/', {
       method: 'POST',
       headers: {
