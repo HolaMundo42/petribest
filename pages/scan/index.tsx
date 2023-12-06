@@ -20,15 +20,24 @@ const Scan: React.FC<ScanProps> = () => {
   const [infoPetridish, setInformation] = useState<string>('');
   const [coloniesPetridish, setColonies] = useState<number>(42);
   const [noFileSelectedError, setFileError] = useState(false);
-  const [filee, setFilee] = useState("https://res.cloudinary.com/dso4vg1hw/image/upload/f_auto,q_auto/fknm0eyvz0lzhrrykdwy");
+  const [filee, setFilee] = useState("");
+  const [file, setFile] = useState(null);
 
   const { data: session } = useSession();
 
   const handleOpenPopup = async ( inputFileRef: React.RefObject<HTMLInputElement>) => {
 
      //procesamiento de imagen
+
+     const formData = new FormData()
+     formData.append('file', file)
+
      const respond = await fetch('/api/cloudinary', {
       method: 'POST', 
+      body: formData, 
+      headers: {
+        "Content-Type": "multipart/form-data",
+      }
      });
      const data = await respond.json()
      console.log(data)
