@@ -4,7 +4,6 @@ import { getServerSession } from "next-auth/next";
 
 const client = new PrismaClient;
 
-
 export default async function handler(req:any, res:any){
 
     console.log(req.body)

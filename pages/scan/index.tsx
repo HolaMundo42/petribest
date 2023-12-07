@@ -13,15 +13,14 @@ interface ScanProps {}
 
 const Scan: React.FC<ScanProps> = () => {
   const inputFileRef = useRef<HTMLInputElement>(null);
-  const [blob, setBlob] = useState<PutBlobResult | null>(null);
   const [selectedFileName, setSelectedFileName] = useState<string | null>(null);
   const [showPopup, setShowPopup] = useState(0); // 0 no 1 loggeado 2 annon
   const [namePetridish, setName] = useState<string>('');
   const [infoPetridish, setInformation] = useState<string>('');
   const [coloniesPetridish, setColonies] = useState<number>(42);
   const [noFileSelectedError, setFileError] = useState(false);
-  const [filee, setFilee] = useState("");
-  const [file, setFile] = useState(null);
+  const [file, setFile] = useState("../bacteria_wp");
+
 
   const { data: session } = useSession();
 
@@ -32,7 +31,7 @@ const Scan: React.FC<ScanProps> = () => {
      const formData = new FormData()
      formData.append('file', file)
 
-     const respond = await fetch('/api/cloudinary', {
+     const respond = await fetch('http://localhost:3000/api/cloudinary', {
       method: 'POST', 
       body: formData, 
       headers: {
@@ -51,7 +50,7 @@ const Scan: React.FC<ScanProps> = () => {
         'Access-Control-Allow-Methods': '*',
       },
       body: JSON.stringify({ 
-        image_url : filee
+        image_url : file
       }),
     });
     
@@ -81,16 +80,21 @@ const Scan: React.FC<ScanProps> = () => {
     }
   }
 
-  const handleFileChange = () => {
+  const handleChangeFile  = async (e:any) => { 
+    setFile(e.target.files[0]);
+    console.log(e.target.files[0]);
+
     const fiile = inputFileRef.current?.files?.[0];
     if (fiile) {
-      setFilee(fiile.name);
+      setFile(fiile.name);
       setSelectedFileName(fiile.name);
     } else {
-      setFilee(""); // or any default value you want when no file is selected
+      setFile(""); // or any default value you want when no file is selected
       setSelectedFileName(null);
     }
-  };
+
+
+  }
 
   const divStyle: React.CSSProperties = {
     height: "100vh",
@@ -156,8 +160,6 @@ const Scan: React.FC<ScanProps> = () => {
       
       if (response.ok) {
         console.log('Fetch POST successful');
-        setBlob(newBlob);
-        console.log("new blob!");
         Router.push("/history");
       } else {
         console.error('Error in Fetch POST:', response.statusText);
@@ -224,8 +226,8 @@ const Scan: React.FC<ScanProps> = () => {
             name="file"
             ref={inputFileRef}
             type="file"
+            onChange={handleChangeFile}
             className="hidden"
-            onChange={handleFileChange}
             required
           />
         </label>
@@ -267,7 +269,7 @@ const Scan: React.FC<ScanProps> = () => {
               <input className="mt-1 p-2 w-full text-black border rounded" type="text" value={infoPetridish} onChange={(e) => setInformation(e.target.value)} />
           </label>
           <Image 
-              src={filee} //poner img blob cuando entienda como
+              src={file} //poner img blob cuando entienda como
               width={250} 
               height={250} 
               alt="PL"
@@ -307,7 +309,7 @@ const Scan: React.FC<ScanProps> = () => {
 
             <h2>Login to save changes</h2>
             <Image 
-              src={filee} //poner img blob cuando entienda como
+              src={file} //poner img blob cuando entienda como
               width={250} 
               height={250} 
               alt="PL"
