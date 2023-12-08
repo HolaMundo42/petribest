@@ -123,7 +123,7 @@ const History: React.FC<HistoryProps> = () => {
       >
         <div className="mb-2 flex items-center gap-4 p-4 ml-3">
           <Image src="/favicon.ico" width={25} height={25} alt="PL" className="h-8 w-8" />
-          <div className="text-slate-200 font-normal text-xl">PetriLab</div>
+          <Link href="/" className="text-slate-200 font-normal text-xl">PetriLab</Link>
         </div>
 
         <Link
