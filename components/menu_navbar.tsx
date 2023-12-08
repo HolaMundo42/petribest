@@ -71,7 +71,7 @@ export const SideCards = () => {
     useEffect(() => {
     const fetchData = async () => {
         try {
-        const response = await fetch('http://localhost:3000/api/registers', {
+        const response = await fetch('https://petrilab.vercel.app/api/registers', {
             method: 'GET',
             headers: {
             'Content-Type': 'application/json',
