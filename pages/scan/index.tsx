@@ -19,7 +19,7 @@ const Scan: React.FC<ScanProps> = () => {
   const [infoPetridish, setInformation] = useState<string>('');
   const [coloniesPetridish, setColonies] = useState<number>(42);
   const [noFileSelectedError, setFileError] = useState(false);
-  const [file, setFile] = useState("../bacteria_wp");
+  const [file, setFile] = useState<File | null>(null);
 
 
   const { data: session } = useSession();
@@ -27,21 +27,18 @@ const Scan: React.FC<ScanProps> = () => {
   const handleOpenPopup = async ( inputFileRef: React.RefObject<HTMLInputElement>) => {
 
      //procesamiento de imagen
-      /*
-     const formData = new FormData()
-     formData.append('file', file)
 
-     const respond = await fetch('https://petrilab.vercel.app/api/cloudinary', {
+     const respond = await fetch('http://petrilab.vercel.app/api/cloudinary', {
       method: 'POST', 
-      body: formData, 
+      body: "", 
       headers: {
         "Content-Type": "multipart/form-data",
       }
      });
      const data = await respond.json()
      console.log(data)
-     */
-
+     
+/*
      //envio de imagen a api
     const response = await fetch('https://petrilabapi.onrender.com/process_image/', {
       method: 'POST',
@@ -66,7 +63,7 @@ const Scan: React.FC<ScanProps> = () => {
       console.error('Error in Fetch POST:', response.statusText);
     }
      
-
+*/
     if(inputFileRef.current && inputFileRef.current.value === ''){
       setShowPopup(0);
       setFileError(true);
@@ -81,19 +78,18 @@ const Scan: React.FC<ScanProps> = () => {
     }
   }
 
-  const handleChangeFile  = async (e:any) => { 
-    setFile(e.target.files[0]);
-    console.log(e.target.files[0]);
+  const handleChangeFile  = async (e: React.ChangeEvent<HTMLInputElement>) => { 
+    const file = e.target.files?.[0];
+    const file_name = inputFileRef.current?.files?.[0]
 
-    const fiile = inputFileRef.current?.files?.[0];
-    if (fiile) {
-      setFile(fiile.name);
-      setSelectedFileName(fiile.name);
-    } else {
-      setFile(""); // or any default value you want when no file is selected
+    if (file && file_name) {
+      setFile(file);
+      setSelectedFileName(file_name.name)
+    }
+    else {
+      setFile(null);
       setSelectedFileName(null);
     }
-
 
   }
 
@@ -138,7 +134,6 @@ const Scan: React.FC<ScanProps> = () => {
         access: 'public',
         handleUploadUrl: '/api/avatar/upload',
       });
-
 
       
       const provDate = new Date();
@@ -227,6 +222,7 @@ const Scan: React.FC<ScanProps> = () => {
             name="file"
             ref={inputFileRef}
             type="file"
+            accept="image/*"
             onChange={handleChangeFile}
             className="hidden"
             required
@@ -269,13 +265,15 @@ const Scan: React.FC<ScanProps> = () => {
               Information:
               <input className="mt-1 p-2 w-full text-black border rounded" type="text" value={infoPetridish} onChange={(e) => setInformation(e.target.value)} />
           </label>
+          {file && (
           <Image 
-              src={file} //poner img blob cuando entienda como
+              src={URL.createObjectURL(file)}
               width={250} 
               height={250} 
               alt="PL"
               className="mt-4"
           />
+          )}
           Colonies: {coloniesPetridish} {/*habriauqe llamar a la funcion de la ia q me de las colonias*/}
           <div className="mt-4 flex justify-end"> 
               <button type="submit" className="px-4 py-2 bg-blue-500 text-white rounded">
@@ -309,13 +307,15 @@ const Scan: React.FC<ScanProps> = () => {
             </button>
 
             <h2>Login to save changes</h2>
-            <Image 
-              src={file} //poner img blob cuando entienda como
+            {file && (
+          <Image 
+              src={URL.createObjectURL(file)}
               width={250} 
               height={250} 
               alt="PL"
               className="mt-4"
           />
+          )}
           Colonies: {coloniesPetridish} {/*habriauqe llamar a la funcion de la ia q me de las colonias*/}
             </div>
             </div>
