@@ -28,7 +28,7 @@ const Scan: React.FC<ScanProps> = () => {
 
      //procesamiento de imagen
 
-     const respond = await fetch('http://petrilab.vercel.app/api/cloudinary', {
+     const respond = await fetch('https://petrilab.vercel.app/api/cloudinary', {
       method: 'POST', 
       body: "", 
       headers: {
@@ -38,7 +38,7 @@ const Scan: React.FC<ScanProps> = () => {
      const data = await respond.json()
      console.log(data)
      
-/*
+
      //envio de imagen a api
     const response = await fetch('https://petrilabapi.onrender.com/process_image/', {
       method: 'POST',
@@ -63,7 +63,7 @@ const Scan: React.FC<ScanProps> = () => {
       console.error('Error in Fetch POST:', response.statusText);
     }
      
-*/
+
     if(inputFileRef.current && inputFileRef.current.value === ''){
       setShowPopup(0);
       setFileError(true);
