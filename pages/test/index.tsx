@@ -2,45 +2,46 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 
 const Scan: React.FC = () => {
-  const [fileData, setFileData] = useState<Array<File | null>>([]);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [cloudinaryUrl, setCloudinaryUrl] = useState<string | null>(null);
 
   const handleChangeFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
 
     if (file) {
       setSelectedFile(file);
-      setFileData([...fileData, file]); // Add the selected file to the array
     }
   };
 
-  const sendFileToBackend = async () => {
-    try {
-      const formData = new FormData();
+  const uploadToCloudinary = async () => {
+    if (selectedFile) {
+      try {
+        // Cloudinary configuration
+        const cloudinaryUrl = 'https://api.cloudinary.com/v1_1/dso4vg1hw/upload';
+        const cloudinaryPreset = 'qprloqah';
 
-      // Append all files in the array to the FormData
-      fileData.forEach((file, index) => {
-        if (file) {
-          formData.append(`image${index}`, file, file.name);
+        const formData = new FormData();
+        formData.append('file', selectedFile);
+        formData.append('upload_preset', cloudinaryPreset);
+
+        // Upload to Cloudinary
+        const response = await fetch(cloudinaryUrl, {
+          method: 'POST',
+          body: formData,
+        });
+
+        if (response.ok) {
+          const result = await response.json();
+          console.log('Image uploaded to Cloudinary:', result);
+
+          // Set the Cloudinary URL in state
+          setCloudinaryUrl(result.secure_url);
+        } else {
+          console.error('Error uploading image to Cloudinary:', response.statusText);
         }
-      });
-
-      // Replace 'YOUR_BACKEND_ENDPOINT' with the actual backend endpoint
-      const response = await fetch('http://localhost:3000/api/cloudinary', {
-        method: 'POST',
-        body: formData,
-      });
-
-      if (response.ok) {
-        console.log('Files uploaded successfully to the backend.');
-        // Optionally, you can clear the selected file and fileData array after successful upload
-        setSelectedFile(null);
-        setFileData([]);
-      } else {
-        console.error('Error uploading files to the backend:', response.statusText);
+      } catch (error) {
+        console.error('Error during image upload:', error);
       }
-    } catch (error) {
-      console.error('Error during file upload:', error);
     }
   };
 
@@ -66,9 +67,21 @@ const Scan: React.FC = () => {
         </div>
       )}
 
-      {/* Button to trigger file upload to the backend */}
-      {fileData.length > 0 && (
-        <button onClick={sendFileToBackend}>Upload to Backend</button>
+      {/* Button to trigger image upload to Cloudinary */}
+      {selectedFile && (
+        <div>
+          <button onClick={uploadToCloudinary}>Upload to Cloudinary</button>
+
+          {/* Display the Cloudinary URL if available */}
+          {cloudinaryUrl && (
+            <div>
+              <h2>Cloudinary URL:</h2>
+              <a href={cloudinaryUrl} target="_blank" rel="noopener noreferrer">
+                {cloudinaryUrl}
+              </a>
+            </div>
+          )}
+        </div>
       )}
     </div>
   );
