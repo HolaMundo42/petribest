@@ -16,7 +16,7 @@ const Scan: React.FC = () => {
   };
 
   const uploadToCloudinary = async () => {
-    if (selectedFile) {
+    /*if (selectedFile) {
       try {
         // Cloudinary configuration
         const cloudinaryUrl = 'https://api.cloudinary.com/v1_1/dso4vg1hw/upload';
@@ -61,7 +61,7 @@ const Scan: React.FC = () => {
       } catch (error) {
         console.error('Error during image upload:', error);
       }
-    }
+    }*/
   };
 
   const submitValuesToHistory = async () => {
@@ -72,11 +72,11 @@ const Scan: React.FC = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ 
-          name: "petrichat",
-          date: "",
-          colonies: colonies || 0,
-          img: cloudinaryUrl || "", //<-- imagen
-          info: "",
+          name: "petritest",
+          date: "today",
+          colonies: 0,
+          img: "yes" || "", //<-- imagen
+          info: "test.",
         }),
       });
       
