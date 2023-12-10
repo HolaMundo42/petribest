@@ -145,11 +145,12 @@ return (
       >
         <FontAwesomeIcon icon={faInstagram} className="w-[1.50rem]" />
       </button>
-      <button
+      <Link 
+        href="https://youtube.com"
         id="youtube"
         className="bg-slate-950 transform hover:-translate-y-3 border-2 w-10 h-10 rounded-full duration-500 text-red-500 border-red-500 hover:bg-red-500 hover:text-white text-2xl flex items-center justify-center"      >
         <FontAwesomeIcon icon={faYoutube} className="w-[1.75rem]"/>
-      </button>
+      </Link>
 
       <button
         id="discord"

@@ -50,7 +50,7 @@ const Scan: React.FC<ScanProps> = () => {
 
           // Set the Cloudinary URL in state
           setCloudinaryUrl(result.secure_url);
-          processImage(inputFileRef);
+          processImage(inputFileRef, cloudinaryUrl);
         } else {
           console.error('Error uploading image to Cloudinary:', response.statusText);
         }
@@ -59,7 +59,7 @@ const Scan: React.FC<ScanProps> = () => {
       }
     }
   }
-  const processImage = async ( inputFileRef: React.RefObject<HTMLInputElement>) => {
+  const processImage = async ( inputFileRef: React.RefObject<HTMLInputElement>, cloudinary_url:string) => {
      //envio de imagen a api
     const response = await fetch('https://petrilabapi.onrender.com/process_image/', {
       method: 'POST',
@@ -69,12 +69,11 @@ const Scan: React.FC<ScanProps> = () => {
         'Access-Control-Allow-Methods': '*',
       },
       body: JSON.stringify({ 
-        image_url : cloudinaryUrl
+        image_url : cloudinary_url
       }),
     });
     
     if (response.ok) {
-      console.log(JSON.stringify(response))
       const petrinum = await response.json();
       const petrinum_final = petrinum["predicted_count"];
       console.log(petrinum_final)
