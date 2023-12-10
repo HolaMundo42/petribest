@@ -137,7 +137,7 @@ const Scan: React.FC<ScanProps> = () => {
 
   const handleUpload = async (event: React.FormEvent) => {
     event.preventDefault();
-    
+
     if(namePetridish === "" || infoPetridish === "")
     {
       console.log("completar campos")
@@ -150,7 +150,13 @@ const Scan: React.FC<ScanProps> = () => {
       }
 
       const file = inputFileRef.current.files[0];
-      
+
+      const newBlob = await upload(file.name, file, {
+        access: 'public',
+        handleUploadUrl: '/api/avatar/upload',
+      });
+
+
       const provDate = new Date();
       const currentDate = provDate.toString()
 
@@ -164,17 +170,16 @@ const Scan: React.FC<ScanProps> = () => {
           name: namePetridish,
           date: currentDate,
           colonies:coloniesPetridish,
-          img: cloudinaryUrl, //<-- imagen
+          img: newBlob, //<--- url de descarga
           info: infoPetridish,
         }),
       });
-      
+
       if (response.ok) {
         console.log('Fetch POST successful');
         Router.push("/history");
       } else {
         console.error('Error in Fetch POST:', response.statusText);
-        alert("Error during POST to history");
       }
     } catch (error) {
       console.error('Error during file upload:', error);
