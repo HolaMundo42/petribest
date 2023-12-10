@@ -20,9 +20,42 @@ const Scan: React.FC<ScanProps> = () => {
   const [coloniesPetridish, setColonies] = useState<number>(42);
   const [noFileSelectedError, setFileError] = useState(false);
   const [file, setFile] = useState<File | null>(null);
-
+  const [cloudinaryUrl, setCloudinaryUrl] = useState<string | null>(null);
 
   const { data: session } = useSession();
+
+  const uploadToCloudinary = async () => {
+    if (file) {
+      try {
+        // Cloudinary configuration
+        const cloudinaryUrl = 'https://api.cloudinary.com/v1_1/dso4vg1hw/upload';
+        const cloudinaryPreset = 'qprloqah';
+
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('upload_preset', cloudinaryPreset);
+
+        // Upload to Cloudinary
+        const response = await fetch(cloudinaryUrl, {
+          method: 'POST',
+          body: formData,
+        });
+
+        if (response.ok) {
+          const result = await response.json();
+          console.log('Image uploaded to Cloudinary:', result);
+
+          // Set the Cloudinary URL in state
+          setCloudinaryUrl(result.secure_url);
+        } else {
+          console.error('Error uploading image to Cloudinary:', response.statusText);
+        }
+      } catch (error) {
+        console.error('Error during image upload:', error);
+      }
+    }
+  };
+
 
   const handleOpenPopup = async ( inputFileRef: React.RefObject<HTMLInputElement>) => {
 
@@ -116,7 +149,7 @@ const Scan: React.FC<ScanProps> = () => {
 
   const handleUpload = async (event: React.FormEvent) => {
     event.preventDefault();
-
+    
     if(namePetridish === "" || infoPetridish === "")
     {
       console.log("completar campos")
@@ -124,6 +157,7 @@ const Scan: React.FC<ScanProps> = () => {
     }
 
     try {
+      uploadToCloudinary();
       if (!inputFileRef.current?.files) {
         throw new Error('No file selected');
       }
