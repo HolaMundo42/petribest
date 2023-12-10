@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
+import Router from 'next/router';
 
 const Scan: React.FC = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -69,6 +70,34 @@ const Scan: React.FC = () => {
     }
   };
 
+  const submitValuesToHistory = async () => {
+    try {
+      const response = await fetch('https://petrilab.vercel.app/api/registers', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ 
+          name: "petrichat",
+          date: "",
+          colonies: colonies || 0,
+          img: cloudinaryUrl, //<-- imagen
+          info: "",
+        }),
+      });
+      
+      if (response.ok) {
+        console.log('Fetch POST to history successful');
+        Router.push("/history");
+      } else {
+        console.error('Error in Fetch POST to history:', response.statusText);
+        alert("Error during POST to history");
+      }
+    } catch (error) {
+      console.error('Error during file upload to history:', error);
+    }
+  };
+
   return (
     <div>
       <h1>Scan Page</h1>
@@ -113,6 +142,9 @@ const Scan: React.FC = () => {
               {colonies}
             </div>
           )}
+
+          {/* Button to submit values to history */}
+          <button onClick={submitValuesToHistory}>Submit to History</button>
         </div>
       )}
     </div>

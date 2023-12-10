@@ -31,8 +31,9 @@ const Scan: React.FC<ScanProps> = () => {
     if (file) {
       try {
         // Cloudinary configuration
-        const cloudinaryUrl = 'https://api.cloudinary.com/v1_1/dso4vg1hw/upload';
-        const cloudinaryPreset = 'qprloqah';
+       
+        const cloudinaryUrl = 'https://api.cloudinary.com/v1_1/dso4vg1hw/upload'
+        const cloudinaryPreset = 'qprloqah'
 
         const formData = new FormData();
         formData.append('file', file);
@@ -149,12 +150,6 @@ const Scan: React.FC<ScanProps> = () => {
       }
 
       const file = inputFileRef.current.files[0];
-
-      const newBlob = await upload(file.name, file, {
-        access: 'public',
-        handleUploadUrl: '/api/avatar/upload',
-      });
-
       
       const provDate = new Date();
       const currentDate = provDate.toString()
@@ -169,7 +164,7 @@ const Scan: React.FC<ScanProps> = () => {
           name: namePetridish,
           date: currentDate,
           colonies:coloniesPetridish,
-          img: "cloudinaryUrl" as string, //<-- imagen
+          img: cloudinaryUrl, //<-- imagen
           info: infoPetridish,
         }),
       });
