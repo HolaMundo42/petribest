@@ -50,6 +50,7 @@ const Scan: React.FC<ScanProps> = () => {
 
           // Set the Cloudinary URL in state
           setCloudinaryUrl(result.secure_url);
+          processImage(inputFileRef);
         } else {
           console.error('Error uploading image to Cloudinary:', response.statusText);
         }
@@ -57,7 +58,8 @@ const Scan: React.FC<ScanProps> = () => {
         console.error('Error during image upload:', error);
       }
     }
-
+  }
+  const processImage = async ( inputFileRef: React.RefObject<HTMLInputElement>) => {
      //envio de imagen a api
     const response = await fetch('https://petrilabapi.onrender.com/process_image/', {
       method: 'POST',
@@ -178,6 +180,7 @@ const Scan: React.FC<ScanProps> = () => {
         Router.push("/history");
       } else {
         console.error('Error in Fetch POST:', response.statusText);
+        alert("Error during POST to history");
       }
     } catch (error) {
       console.error('Error during file upload:', error);
