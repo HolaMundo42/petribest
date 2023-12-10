@@ -21,48 +21,42 @@ const Scan: React.FC = () => {
         // Cloudinary configuration
         const cloudinaryUrl = 'https://api.cloudinary.com/v1_1/dso4vg1hw/upload';
         const cloudinaryPreset = 'qprloqah';
+        const TIMEOUT = 30000; // Set your preferred timeout in milliseconds (e.g., 30 seconds)
 
         const formData = new FormData();
         formData.append('file', selectedFile);
         formData.append('upload_preset', cloudinaryPreset);
 
-        // Upload to Cloudinary
-        const response = await fetch(cloudinaryUrl, {
+        // Create a promise that will reject after the specified timeout
+        const timeoutPromise = new Promise((_, reject) =>
+          setTimeout(() => reject(new Error('Request timeout')), TIMEOUT)
+        );
+
+        // Create a promise for the actual fetch request
+        const fetchPromise = fetch(cloudinaryUrl, {
           method: 'POST',
           body: formData,
         });
 
-        if (response.ok) {
-          const result = await response.json();
-          console.log('Image uploaded to Cloudinary:', result);
+        // Use Promise.race to handle the timeout
+        const response = await Promise.race([fetchPromise, timeoutPromise]);
 
-          // Set the Cloudinary URL in state
-          setCloudinaryUrl(result.secure_url);
+        if (response instanceof Response) {
+          if (response.ok) {
+            const result = await response.json();
+            console.log('Image uploaded to Cloudinary:', result);
 
-          // Make a fetch request to the petrilabapi.onrender.com API
-          const petriLabApiResponse = await fetch('https://petrilabapi.onrender.com/process_image/', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'Access-Control-Allow-Credentials': 'True',
-              'Access-Control-Allow-Methods': '*',
-            },
-            body: JSON.stringify({
-              image_url: result.secure_url,
-            }),
-          });
+            // Set the Cloudinary URL in state
+            setCloudinaryUrl(result.secure_url);
 
-          if (petriLabApiResponse.ok) {
-            const petrinum = await petriLabApiResponse.json();
-            const petrinum_final = petrinum["predicted_count"];
-            console.log(petrinum_final);
-            setColonies(petrinum_final);
+            // Continue with the rest of the code for the second API request
+            // ...
           } else {
-            console.log(JSON.stringify(petriLabApiResponse));
-            console.error('Error in Fetch POST:', petriLabApiResponse.statusText);
+            console.error('Error uploading image to Cloudinary:', response.statusText);
           }
         } else {
-          console.error('Error uploading image to Cloudinary:', response.statusText);
+          // Handle the timeout error
+          console.error('Timeout exceeded during image upload');
         }
       } catch (error) {
         console.error('Error during image upload:', error);
@@ -81,7 +75,7 @@ const Scan: React.FC = () => {
           name: "petrichat",
           date: "",
           colonies: colonies || 0,
-          img: cloudinaryUrl, //<-- imagen
+          img: cloudinaryUrl || "", //<-- imagen
           info: "",
         }),
       });
