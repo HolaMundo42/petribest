@@ -169,7 +169,7 @@ const Scan: React.FC<ScanProps> = () => {
           name: namePetridish,
           date: currentDate,
           colonies:coloniesPetridish,
-          img: cloudinaryUrl, //<-- imagen
+          img: "cloudinaryUrl" as string, //<-- imagen
           info: infoPetridish,
         }),
       });
