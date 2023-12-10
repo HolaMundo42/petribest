@@ -59,19 +59,9 @@ const Scan: React.FC<ScanProps> = () => {
 
   const handleOpenPopup = async ( inputFileRef: React.RefObject<HTMLInputElement>) => {
 
-     //procesamiento de imagen
-/*
-     const respond = await fetch('https://petrilab.vercel.app/api/cloudinary', {
-      method: 'POST', 
-      body: "", 
-      headers: {
-        "Content-Type": "multipart/form-data",
-      }
-     });
-     const data = await respond.json()
-     console.log(data)
-     
-*/
+    //cloudinary imagen
+    uploadToCloudinary();
+
      //envio de imagen a api
     const response = await fetch('https://petrilabapi.onrender.com/process_image/', {
       method: 'POST',
@@ -157,7 +147,6 @@ const Scan: React.FC<ScanProps> = () => {
     }
 
     try {
-      uploadToCloudinary();
       if (!inputFileRef.current?.files) {
         throw new Error('No file selected');
       }
