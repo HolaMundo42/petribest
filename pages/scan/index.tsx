@@ -149,12 +149,13 @@ const Scan: React.FC<ScanProps> = () => {
         throw new Error('No file selected');
       }
 
-      const file = inputFileRef.current.files[0];
+      /*const file = inputFileRef.current.files[0];
 
+      
       const newBlob = await upload(file.name, file, {
         access: 'public',
         handleUploadUrl: '/api/avatar/upload',
-      });
+      });*/
 
 
       const provDate = new Date();
@@ -170,7 +171,7 @@ const Scan: React.FC<ScanProps> = () => {
           name: namePetridish,
           date: currentDate,
           colonies:coloniesPetridish,
-          img: newBlob, //<--- url de descarga
+          img: cloudinaryUrl, //<--- url de img en cloudinary
           info: infoPetridish,
         }),
       });
