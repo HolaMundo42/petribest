@@ -183,7 +183,7 @@ const Scan: React.FC<ScanProps> = () => {
           name: namePetridish,
           date: currentDate,
           colonies:coloniesPetridish,
-          img: newBlob, //<--- url de descarga
+          img: cloudinaryUrl, //<-- imagen
           info: infoPetridish,
         }),
       });
