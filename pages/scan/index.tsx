@@ -81,7 +81,7 @@ const Scan: React.FC<ScanProps> = () => {
         'Access-Control-Allow-Methods': '*',
       },
       body: JSON.stringify({ 
-        image_url : file
+        image_url : cloudinaryUrl
       }),
     });
     
