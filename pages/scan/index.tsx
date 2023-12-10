@@ -24,7 +24,10 @@ const Scan: React.FC<ScanProps> = () => {
 
   const { data: session } = useSession();
 
-  const uploadToCloudinary = async () => {
+
+  const handleOpenPopup = async ( inputFileRef: React.RefObject<HTMLInputElement>) => {
+
+    //cloudinary imagen
     if (file) {
       try {
         // Cloudinary configuration
@@ -54,13 +57,6 @@ const Scan: React.FC<ScanProps> = () => {
         console.error('Error during image upload:', error);
       }
     }
-  };
-
-
-  const handleOpenPopup = async ( inputFileRef: React.RefObject<HTMLInputElement>) => {
-
-    //cloudinary imagen
-    uploadToCloudinary();
 
      //envio de imagen a api
     const response = await fetch('https://petrilabapi.onrender.com/process_image/', {
