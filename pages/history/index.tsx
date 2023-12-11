@@ -40,11 +40,12 @@ const History: React.FC<HistoryProps> = () => {
           setMockData(data.data);
           if (data.data.length > 0) {
             const item = data.data[0];
+            console.log(item)
             setSelectedCard(0);
             setSelectedItemName(item.name);
             setSelectedItemDate(item.date);
             setSelectedItemColonies(item.colonies);
-            setSelectedItemImageUrl(item.imageUrl);
+            setSelectedItemImageUrl(item.image);
             setSelectedItemInfo(item.info);
           }
         } else {
