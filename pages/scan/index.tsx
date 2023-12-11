@@ -31,7 +31,7 @@ const Scan: React.FC<ScanProps> = () => {
     if (file) {
       try {
         // Cloudinary configuration
-       
+        
         const cloudinaryUrl = 'https://api.cloudinary.com/v1_1/dso4vg1hw/upload'
         const cloudinaryPreset = 'qprloqah'
 
@@ -83,7 +83,7 @@ const Scan: React.FC<ScanProps> = () => {
       console.log(JSON.stringify(response))
       console.error('Error in Fetch POST:', response.statusText);
     }
-     
+    
 
     if(inputFileRef.current && inputFileRef.current.value === ''){
       setShowPopup(0);
