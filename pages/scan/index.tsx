@@ -162,26 +162,31 @@ const Scan: React.FC<ScanProps> = () => {
       const currentDate = provDate.toString()
 
       // Fetch POST after upload
-      const response = await fetch('https://petrilab.vercel.app/api/registers', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ 
-          name: namePetridish,
-          date: currentDate,
-          colonies:coloniesPetridish,
-          img: cloudinaryUrl, //<--- url de img en cloudinary
-          info: infoPetridish,
-        }),
-      });
-
-      if (response.ok) {
-        console.log('Fetch POST successful');
-        Router.push("/history");
-      } else {
-        console.error('Error in Fetch POST:', response.statusText);
-      }
+      try {
+        const response = await fetch('https://petrilab.vercel.app/api/registers', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ 
+            name: namePetridish,
+            date: "today",
+            colonies: 0,
+            img: "yes" || "", //<-- imagen
+            info: "test.",
+          }),
+        });
+        
+        if (response.ok) {
+          console.log('Fetch POST to history successful');
+          Router.push("/history");
+        } else {
+          console.error('Error in Fetch POST to history:', response.statusText);
+          alert("Error during POST to history");
+        }
+      } catch (error) {
+        console.error('Error during file upload to history:', error);
+      }      
     } catch (error) {
       console.error('Error during file upload:', error);
     }
