@@ -158,8 +158,15 @@ const Scan: React.FC<ScanProps> = () => {
       });*/
 
 
-      const provDate = new Date();
-      const currentDate = provDate.toString()
+      const currentDate = new Date();
+      const day = currentDate.getDate();
+      const month = currentDate.getMonth() + 1; // Month is zero-based, so we add 1
+      const year = currentDate.getFullYear() % 100; // Get the last two digits of the year
+
+      const formattedDay = day < 10 ? `0${day}` : day;
+      const formattedMonth = month < 10 ? `0${month}` : month;
+  
+      const formattedDate = `${formattedDay}/${formattedMonth}/${year}`;
 
       // Fetch POST after upload
       try {

@@ -68,6 +68,7 @@ const History: React.FC<HistoryProps> = () => {
           isSelected ? 'border-2 border-white bg-[#1e4261]' : 'border-[1px] border-slate-400 hover:border-slate-200 bg-[#16222e] hover:bg-[#192531]'
         }`}
         onClick={() => {
+          console.log(item);
           setSelectedCard(index);
           setSelectedItemName(item.name);
           setSelectedItemDate(item.date);
@@ -170,7 +171,12 @@ const History: React.FC<HistoryProps> = () => {
                 
                 <div className="flex mb-3">
                   <div className="mr-4">
-                    <img src={selectedItemImageUrl} alt="img.jpg" className="w-80 h-60 object-cover rounded-lg mr-5" />
+                    <Image
+                      src={selectedItemImageUrl} 
+                      alt="img.jpg" 
+                      width={200}
+                      height={200}
+                      className="w-80 h-60 object-cover rounded-lg mr-5" />
                   </div>
                   
                   <div className="flex-1">
