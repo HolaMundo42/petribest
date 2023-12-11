@@ -20,7 +20,7 @@ model registers {
   id     String @id @default(uuid())
   name   String? @db.VarChar(255) @unique
   date   String? @db.VarChar(255)
-  colonies Int?
+  colonies String? @db.VarChar(255)
   img    String  @db.VarChar(255)
   info   String? @db.VarChar(255)
   User   User   @relation(fields: [userId], references: [id])
