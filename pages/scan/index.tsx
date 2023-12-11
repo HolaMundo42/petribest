@@ -168,8 +168,6 @@ const Scan: React.FC<ScanProps> = () => {
   
       const formattedDate = `${formattedDay}/${formattedMonth}/${year}`;
 
-      const colonias = coloniesPetridish;
-
       // Fetch POST after upload
       try {
         const response = await fetch('https://petrilab.vercel.app/api/registers', {
@@ -180,7 +178,7 @@ const Scan: React.FC<ScanProps> = () => {
           body: JSON.stringify({ 
             name: namePetridish,
             date: formattedDate,
-            colonies: colonias,
+            colonies: 20,
             img: cloudinaryUrl || "", //<-- imagen
             info: infoPetridish,
           }),
