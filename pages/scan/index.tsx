@@ -17,7 +17,7 @@ const Scan: React.FC<ScanProps> = () => {
   const [showPopup, setShowPopup] = useState(0); // 0 no 1 loggeado 2 annon
   const [namePetridish, setName] = useState<string>('');
   const [infoPetridish, setInformation] = useState<string>('');
-  const [coloniesPetridish, setColonies] = useState<number>(42);
+  const [coloniesPetridish, setColonies] = useState<number>(0);
   const [noFileSelectedError, setFileError] = useState(false);
   const [file, setFile] = useState<File | null>(null);
   const [cloudinaryUrl, setCloudinaryUrl] = useState<string | null>(null);
@@ -168,6 +168,8 @@ const Scan: React.FC<ScanProps> = () => {
   
       const formattedDate = `${formattedDay}/${formattedMonth}/${year}`;
 
+      const colonias_contadas = coloniesPetridish;
+
       // Fetch POST after upload
       try {
         const response = await fetch('https://petrilab.vercel.app/api/registers', {
@@ -178,7 +180,7 @@ const Scan: React.FC<ScanProps> = () => {
           body: JSON.stringify({ 
             name: namePetridish,
             date: formattedDate,
-            colonies: 20,
+            colonies: colonias_contadas as number,
             img: cloudinaryUrl || "", //<-- imagen
             info: infoPetridish,
           }),
