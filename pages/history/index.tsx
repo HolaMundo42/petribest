@@ -11,7 +11,7 @@ interface HistoryItem {
   name: string;
   date: string;
   colonies: number;
-  imageUrl: string;
+  img: string;
   info: string;
 }
 
@@ -20,7 +20,7 @@ const History: React.FC<HistoryProps> = () => {
   const [selectedItemName, setSelectedItemName] = useState<string | null>(null);
   const [selectedItemDate, setSelectedItemDate] = useState<string | null>(null);
   const [selectedItemColonies, setSelectedItemColonies] = useState<number | null>(null);
-  const [selectedItemImageUrl, setSelectedItemImageUrl] = useState<string>('');
+  const [selectedItemImg, setSelectedItemImg] = useState<string>('');
   const [selectedItemInfo, setSelectedItemInfo] = useState<string | null>(null);
   const [isEditMode, setIsEditMode] = useState(false);
   const [mockData, setMockData] = useState<HistoryItem[]>([]);
@@ -45,7 +45,7 @@ const History: React.FC<HistoryProps> = () => {
             setSelectedItemName(item.name);
             setSelectedItemDate(item.date);
             setSelectedItemColonies(item.colonies);
-            setSelectedItemImageUrl(item.img);
+            setSelectedItemImg(item.img);
             setSelectedItemInfo(item.info);
           }
         } else {
@@ -73,7 +73,7 @@ const History: React.FC<HistoryProps> = () => {
           setSelectedItemName(item.name);
           setSelectedItemDate(item.date);
           setSelectedItemColonies(item.colonies);
-          setSelectedItemImageUrl(item.imageUrl);
+          setSelectedItemImg(item.img);
           setSelectedItemInfo(item.info);
           setIsEditMode(false)
         }}
@@ -162,7 +162,7 @@ const History: React.FC<HistoryProps> = () => {
                   
                   <div className="flex-1 text-right">
                     <p className="text-slate-200">
-                      <b>Colonies:</b> {selectedItemColonies}
+                      <b>Colonies: </b>{selectedItemColonies}
                     </p>
                   </div>
                 </div>
@@ -171,9 +171,8 @@ const History: React.FC<HistoryProps> = () => {
                 
                 <div className="flex mb-3">
                   <div className="mr-4">
-                    {selectedItemImageUrl}
                     <img
-                      src={selectedItemImageUrl} 
+                      src={selectedItemImg} 
                       alt="img.jpg" 
                       width={200}
                       height={200}
