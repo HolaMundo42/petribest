@@ -46,7 +46,7 @@ export default async function handler(req:any, res:any){
                     name: req.body.name as string,
                     date: req.body.dato as string,
                     colonies: req.body.colonies as number,
-                    img: req.body.img.url as string,
+                    img: req.body.img as string,
                     info: req.body.info as string,
                 },
             })    
