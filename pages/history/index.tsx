@@ -11,7 +11,7 @@ interface HistoryItem {
   name: string;
   date: string;
   colonies: number;
-  img: string;
+  imageUrl: string;
   info: string;
 }
 
@@ -44,7 +44,7 @@ const History: React.FC<HistoryProps> = () => {
             setSelectedItemName(item.name);
             setSelectedItemDate(item.date);
             setSelectedItemColonies(item.colonies);
-            setSelectedItemImageUrl(item.img);
+            setSelectedItemImageUrl(item.imageUrl);
             setSelectedItemInfo(item.info);
           }
         } else {
@@ -68,12 +68,12 @@ const History: React.FC<HistoryProps> = () => {
           isSelected ? 'border-2 border-white bg-[#1e4261]' : 'border-[1px] border-slate-400 hover:border-slate-200 bg-[#16222e] hover:bg-[#192531]'
         }`}
         onClick={() => {
-          console.log(item);
+          console.log(item.imageUrl);
           setSelectedCard(index);
           setSelectedItemName(item.name);
           setSelectedItemDate(item.date);
           setSelectedItemColonies(item.colonies);
-          setSelectedItemImageUrl(item.img);
+          setSelectedItemImageUrl(item.imageUrl.img);
           setSelectedItemInfo(item.info);
           setIsEditMode(false)
         }}
