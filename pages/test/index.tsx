@@ -72,7 +72,7 @@ const Scan: React.FC = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ 
-          name: "petritest",
+          name: "petritest2",
           date: "today",
           colonies: 0,
           img: "yes" || "", //<-- imagen
