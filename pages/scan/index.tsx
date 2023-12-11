@@ -169,7 +169,6 @@ const Scan: React.FC<ScanProps> = () => {
       const formattedDate = `${formattedDay}/${formattedMonth}/${year}`;
 
       console.log(coloniesPetridish);
-
       // Fetch POST after upload
       try {
         const response = await fetch('https://petrilab.vercel.app/api/registers', {
