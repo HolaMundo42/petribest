@@ -45,7 +45,7 @@ const History: React.FC<HistoryProps> = () => {
             setSelectedItemName(item.name);
             setSelectedItemDate(item.date);
             setSelectedItemColonies(item.colonies);
-            setSelectedItemImageUrl(item.img as string);
+            setSelectedItemImageUrl(item.img);
             setSelectedItemInfo(item.info);
           }
         } else {
@@ -171,7 +171,8 @@ const History: React.FC<HistoryProps> = () => {
                 
                 <div className="flex mb-3">
                   <div className="mr-4">
-                    <Image
+                    {selectedItemImageUrl}
+                    <img
                       src={selectedItemImageUrl} 
                       alt="img.jpg" 
                       width={200}
