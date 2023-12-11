@@ -178,7 +178,7 @@ const Scan: React.FC<ScanProps> = () => {
           body: JSON.stringify({ 
             name: namePetridish,
             date: currentDate,
-            colonies: coloniesPetridish,
+            colonies: 0,
             img: cloudinaryUrl || "", //<-- imagen
             info: infoPetridish,
           }),
