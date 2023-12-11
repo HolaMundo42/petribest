@@ -19,11 +19,11 @@
         name: string;
         date: string;
         colonies: number;
-        imgSrc: string;
+        img: string;
         info: string;
     }
 
-    const Card: React.FC<CardProps> = ({ name, date, colonies, imgSrc, info }) => (
+    const Card: React.FC<CardProps> = ({ name, date, colonies, img, info }) => (
         <div className="border-2 border-slate-500 pt-2 bg-[rgb(30,30,30)] p-4 mt-0 mb-4 rounded-lg shadow-md transition-transform transform hover:scale-105 w-7/12">
         <div className="flex">
             <div className="flex-1">
@@ -43,7 +43,7 @@
 
         <div className="flex mb-3">
             <div className="mr-4 text-white">
-                <img src={imgSrc} alt="img.jpg" className="w-60 h-40 object-cover rounded-lg" />
+                <img src={img} alt="img.jpg" className="w-60 h-40 object-cover rounded-lg" />
             </div>
 
             <div className="flex-1">
@@ -60,7 +60,7 @@ interface CardProps {
     name: string;
     date: string;
     colonies: number;
-    imgSrc: string;
+    img: string;
     info: string;
 }
 
@@ -100,7 +100,7 @@ export const SideCards = () => {
             name={card.name}
             date={card.date}
             colonies={card.colonies}
-            imgSrc={card.imgSrc}
+            img={card.img}
             info={card.info}
         />
         ))}
