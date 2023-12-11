@@ -11,7 +11,7 @@ interface HistoryItem {
   name: string;
   date: string;
   colonies: number;
-  imageUrl: string;
+  img: string;
   info: string;
 }
 
@@ -44,7 +44,7 @@ const History: React.FC<HistoryProps> = () => {
             setSelectedItemName(item.name);
             setSelectedItemDate(item.date);
             setSelectedItemColonies(item.colonies);
-            setSelectedItemImageUrl(item.imageUrl);
+            setSelectedItemImageUrl(item.img);
             setSelectedItemInfo(item.info);
           }
         } else {
@@ -73,7 +73,7 @@ const History: React.FC<HistoryProps> = () => {
           setSelectedItemName(item.name);
           setSelectedItemDate(item.date);
           setSelectedItemColonies(item.colonies);
-          setSelectedItemImageUrl(item.imageUrl);
+          setSelectedItemImageUrl(item.img);
           setSelectedItemInfo(item.info);
           setIsEditMode(false)
         }}
