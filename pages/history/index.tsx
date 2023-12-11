@@ -73,7 +73,7 @@ const History: React.FC<HistoryProps> = () => {
           setSelectedItemName(item.name);
           setSelectedItemDate(item.date);
           setSelectedItemColonies(item.colonies);
-          setSelectedItemImageUrl(item.imageUrl.img);
+          setSelectedItemImageUrl(item.imageUrl);
           setSelectedItemInfo(item.info);
           setIsEditMode(false)
         }}
