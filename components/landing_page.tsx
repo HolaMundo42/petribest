@@ -100,15 +100,15 @@ const Sections: React.FC = () => {
         <h2 className="text-4xl font-semibold py-8 text-slate-200">Features</h2>
         <div className="flex flex-col md:flex-row gap-8">
           <div className="ml-10 bg-[#05090c] text-white p-6 rounded shadow-md hover:shadow-lg transition duration-300 transform hover:translate-y-[-5px] md:w-1/3">
-            <h3 className="text-xl font-semibold p b-2">Responsive Design</h3>
+            <h3 className="text-xl font-semibold p b-2">Count your petri dishes</h3>
             <p className="text-slate-300">
-              Our web page is fully responsive, ensuring it looks great on all devices.
+              By uploading a petri dish image with colonies, a full integrated IA will count them and display the number.
             </p>
           </div>
           <div className="mx-10 bg-[#05090c] text-white p-6 rounded shadow-md hover:shadow-lg transition duration-300 transform hover:translate-y-[-5px] md:w-1/3">
-            <h3 className="text-xl font-semibold mb-2">Simple and Minimalistic</h3>
+            <h3 className="text-xl font-semibold mb-2">Keep registred your colonies</h3>
             <p className="text-slate-300">
-              We believe in the beauty of simplicity, making the user experience smooth and clutter-free.
+              If you are logged in, our web page has the ability to store your images and extra info about them like name of substance, date and etra data you can add.
             </p>
           </div>
           <div className="mr-10 bg-[#05090c] text-white p-6 rounded shadow-md hover:shadow-lg transition duration-300 transform hover:translate-y-[-5px] md:w-1/3">
@@ -146,7 +146,7 @@ return (
         <FontAwesomeIcon icon={faInstagram} className="w-[1.50rem]" />
       </button>
       <Link 
-        href="https://youtube.com"
+        href="https://www.youtube.com/channel/UCJxZ2IPWbuLxPVBxIeCyj_Q"
         id="youtube"
         className="bg-slate-950 transform hover:-translate-y-3 border-2 w-10 h-10 rounded-full duration-500 text-red-500 border-red-500 hover:bg-red-500 hover:text-white text-2xl flex items-center justify-center"      >
         <FontAwesomeIcon icon={faYoutube} className="w-[1.75rem]"/>
