@@ -168,7 +168,7 @@ const Scan: React.FC<ScanProps> = () => {
   
       const formattedDate = `${formattedDay}/${formattedMonth}/${year}`;
 
-      const colonias_contadas = coloniesPetridish;
+      console.log(coloniesPetridish);
 
       // Fetch POST after upload
       try {
@@ -180,7 +180,7 @@ const Scan: React.FC<ScanProps> = () => {
           body: JSON.stringify({ 
             name: namePetridish,
             date: formattedDate,
-            colonies: colonias_contadas as number,
+            colonies: 20,
             img: cloudinaryUrl || "", //<-- imagen
             info: infoPetridish,
           }),
