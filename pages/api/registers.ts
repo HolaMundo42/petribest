@@ -44,7 +44,7 @@ export default async function handler(req:any, res:any){
                 data: {
                     userId: user.id,
                     name: req.body.name as string,
-                    date: req.body.dato as string,
+                    date: req.body.date as string,
                     colonies: req.body.colonies as number,
                     img: req.body.img as string,
                     info: req.body.info as string,
