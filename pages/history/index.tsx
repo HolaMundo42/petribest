@@ -20,7 +20,7 @@ const History: React.FC<HistoryProps> = () => {
   const [selectedItemName, setSelectedItemName] = useState<string | null>(null);
   const [selectedItemDate, setSelectedItemDate] = useState<string | null>(null);
   const [selectedItemColonies, setSelectedItemColonies] = useState<number | null>(null);
-  const [selectedItemImageUrl, setSelectedItemImageUrl] = useState("/huevo_2.png");
+  const [selectedItemImageUrl, setSelectedItemImageUrl] = useState<string | null>(null);
   const [selectedItemInfo, setSelectedItemInfo] = useState<string | null>(null);
   const [isEditMode, setIsEditMode] = useState(false);
   const [mockData, setMockData] = useState<HistoryItem[]>([]);
